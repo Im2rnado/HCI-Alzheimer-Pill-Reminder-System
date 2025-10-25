@@ -80,6 +80,7 @@ DOSE_TIMES = {
 REMINDER_WINDOW_MINS = 5   # Show reminder 5 mins before
 PILL_WINDOW_MINS = 30      # Stop reminder 30 mins after
 WARNING_COOLDOWN_MINS = 60 # Warn if taken again within 60 mins
+```
 
 ## 🎯 Gesture Recognition
 
