@@ -302,7 +302,6 @@ def main():
             hand_landmark = (int(index_tip.x * w), int(index_tip.y * h))
             cv2.circle(frame, hand_landmark, 10, (255, 0, 0), -1)
             
-
         # --- 4. Gesture Recognition Logic ---
         if hand_landmark and last_known_marker_center is not None:
             # Calculate distance
@@ -322,7 +321,7 @@ def main():
                 cv2.putText(frame, "RECORDING", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
                 # State: Hand has moved AWAY
-                if dist > (PROXIMITY_THRESHOLD + 20): # Add hysteresis
+                if dist > (PROXIMITY_THRESHOLD):
                     print(f"Stopped recording. Points: {len(gesture_points)}")
                     is_recording = False
                     
@@ -339,8 +338,7 @@ def main():
                         dy = last_pt.y - first_pt.y
                         print(f"Gesture: {gesture_name}, Score: {score}, Points: {len(gesture_points)}, Delta: ({dx:.0f}, {dy:.0f})")
                         
-                        if score > 0.25: # Confidence threshold (lowered from 0.3)
-                            # --- This is the main event! ---
+                        if score > 0.25: # Confidence threshold
                             event, msg = handle_pill_take_event(gesture_name)
                             if event:
                                 conn = send_to_gui(conn, event, msg)
